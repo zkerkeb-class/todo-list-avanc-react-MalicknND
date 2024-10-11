@@ -1,0 +1,42 @@
+/* Conteneur principal pour chaque tâche */
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  margin: 10px auto;
+  width: 90%;
+  max-width: 500px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s;
+}
+
+/* Changer la couleur de fond au survol */
+.todo-item:hover {
+  background-color: #f1f1f1;
+}
+
+/* Style du texte de la tâche */
+.todo-item .task-text {
+  flex-grow: 1;
+  color: #333;
+  text-align: center;
+}
+
+/* Style pour le bouton de suppression */
+.todo-item button {
+  padding: 5px 15px;
+  border: none;
+  border-radius: 3px;
+  background-color: #e74c3c;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Changer la couleur de fond du bouton au survol */
+.todo-item button:hover {
+  background-color: #c0392b;
+}
