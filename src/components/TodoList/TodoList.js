@@ -1,17 +1,20 @@
 import React from 'react';
 import TodoItem from '../TodoItem/TodoItem';
-import './todolist.css';
 
-const TodoList = ({tasks}) => {
+function TodoList({tasks, removeTask, toggleTaskCompletion}) {
   return (
-    <div>
-      <ul>
-        {tasks.map((task, index) => (
-          <TodoItem task={task} key={index} />
-        ))}
-      </ul>
-    </div>
+    <ul>
+      {tasks.map((task, index) => (
+        <TodoItem
+          key={index}
+          task={task}
+          index={index}
+          removeTask={removeTask}
+          toggleTaskCompletion={toggleTaskCompletion}
+        />
+      ))}
+    </ul>
   );
-};
+}
 
 export default TodoList;

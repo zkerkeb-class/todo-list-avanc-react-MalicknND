@@ -1,42 +1,67 @@
-/* Conteneur principal pour chaque tâche */
-.todo-item {
+.wrapper {
+  margin: 0 auto;
+}
+ul {
+  list-style-type: none; /* Supprime les puces de la liste */
+  padding: 0;
+  margin: 0 auto;
+  width: 100%; /* Prend tout l'espace disponible */
+  max-width: 400px; /* Limite la largeur de la liste */
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ajoute une ombre légère */
+}
+
+li {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 15px;
-  margin: 10px auto;
-  width: 90%;
-  max-width: 500px;
-  background-color: #f9f9f9;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #f9fafc;
   border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ombre sur chaque élément */
 }
 
-/* Changer la couleur de fond au survol */
-.todo-item:hover {
-  background-color: #f1f1f1;
+li:last-child {
+  margin-bottom: 0; /* Supprime la marge sur le dernier élément */
 }
 
-/* Style du texte de la tâche */
-.todo-item .task-text {
-  flex-grow: 1;
-  color: #333;
-  text-align: center;
+li.completed {
+  text-decoration: line-through;
+  color: #a9a9a9;
 }
 
-/* Style pour le bouton de suppression */
-.todo-item button {
-  padding: 5px 15px;
+button {
+  padding: 8px 12px;
   border: none;
-  border-radius: 3px;
-  background-color: #e74c3c;
-  color: white;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  margin-left: 10px;
 }
 
-/* Changer la couleur de fond du bouton au survol */
-.todo-item button:hover {
-  background-color: #c0392b;
+button:first-child {
+  background-color: #28a745;
+  color: white;
+}
+
+button:first-child:hover {
+  background-color: #218838;
+}
+
+button:last-child {
+  background-color: #dc3545;
+  color: white;
+}
+
+button:last-child:hover {
+  background-color: #c82333;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+  font-size: 2rem;
+  margin-bottom: 20px;
 }
