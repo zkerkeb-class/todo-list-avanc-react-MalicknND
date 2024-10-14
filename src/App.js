@@ -1,59 +1,39 @@
-import React, {useEffect, useState} from 'react';
-import TodoList from './components/TodoList/TodoList';
+import React, {useState, useMemo} from 'react';
 import TodoForm from './components/TodoForm/TodoForm';
-import './App.css';
+import TodoList from './components/TodoList/TodoList';
+import TaskFilter from './components/TaskFilter/TaskFilter';
+import useTasks from './hooks/useTasks';
 
-function App() {
-  const [tasks, setTasks] = useState([]);
+const App = () => {
+  // Utilisation du custom hook useTasks pour gérer l'état des tâches
+  const {tasks, addTask, deleteTask, toggleTask} = useTasks();
+  const [filter, setFilter] = useState('all'); // Gestion du filtre (toutes, terminées, non terminées)
 
-  // Récupérer les tâches sauvegardées dans le localStorage au chargement de la page
-  useEffect(() => {
-    const savedTasks = JSON.parse(localStorage.getItem('tasks'));
-    if (savedTasks) {
-      setTasks(savedTasks); // Récupère les tâches sauvegardées
+  // Filtrage des tâches à l'aide de useMemo pour améliorer les performances
+  const filteredTasks = useMemo(() => {
+    if (filter === 'completed') {
+      return tasks.filter(task => task.completed); // Tâches terminées
     }
-  }, []);
-
-  // Sauvegarder les tâches dans le localStorage à chaque modification
-  useEffect(() => {
-    if (tasks.length > 0) {
-      localStorage.setItem('tasks', JSON.stringify(tasks)); // Sauvegarde dans le localStorage
+    if (filter === 'pending') {
+      return tasks.filter(task => !task.completed); // Tâches non terminées
     }
-  }, [tasks]);
-
-  // Ajouter une tâche
-  const addTask = task => {
-    if (task.trim()) {
-      const newTask = {text: task, completed: false};
-      setTasks(prevTasks => [...prevTasks, newTask]); // Met à jour l'état des tâches
-    }
-  };
-
-  // Supprimer une tâche
-  const removeTask = index => {
-    const updatedTasks = tasks.filter((_, i) => i !== index);
-    setTasks(updatedTasks); // Met à jour l'état des tâches
-  };
-
-  // Changer l'état de la tâche (terminée ou non)
-  const toggleTaskCompletion = index => {
-    const updatedTasks = tasks.map((task, i) =>
-      i === index ? {...task, completed: !task.completed} : task,
-    );
-    setTasks(updatedTasks); // Met à jour l'état des tâches
-  };
+    return tasks; // Toutes les tâches
+  }, [tasks, filter]);
 
   return (
-    <div className="container">
-      <h1>To-Do List</h1>
-      <TodoForm addTask={addTask} />
+    <div>
+      <h1>Ma Liste de Tâches</h1>
+      <TodoForm addTask={addTask} /> {/* Formulaire pour ajouter une tâche */}
+      <TaskFilter filter={filter} setFilter={setFilter} />{' '}
+      {/* Boutons de filtrage */}
       <TodoList
-        tasks={tasks}
-        removeTask={removeTask}
-        toggleTaskCompletion={toggleTaskCompletion}
-      />
+        tasks={filteredTasks}
+        toggleTask={toggleTask}
+        deleteTask={deleteTask}
+      />{' '}
+      {/* Liste des tâches */}
     </div>
   );
-}
+};
 
 export default App;

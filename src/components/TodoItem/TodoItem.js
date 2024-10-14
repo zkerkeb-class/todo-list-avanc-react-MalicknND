@@ -1,19 +1,12 @@
 import React from 'react';
 import './todoitem.css';
-
-function TodoItem({task, index, removeTask, toggleTaskCompletion}) {
+const TodoItem = ({task, toggleTask, deleteTask}) => {
   return (
-    <div className="wrapper">
-      <li className={task.completed ? 'completed' : ''}>
-        {task.text}
-
-        <button onClick={() => toggleTaskCompletion(index)}>
-          {task.completed ? 'Réinitialiser' : 'Terminer'}
-        </button>
-        <button onClick={() => removeTask(index)}>Supprimer</button>
-      </li>
-    </div>
+    <li className={`todo-item ${task.completed ? 'completed' : ''}`}>
+      <span onClick={() => toggleTask(task.id)}>{task.text}</span>
+      <button onClick={() => deleteTask(task.id)}>Supprimer</button>
+    </li>
   );
-}
+};
 
 export default TodoItem;

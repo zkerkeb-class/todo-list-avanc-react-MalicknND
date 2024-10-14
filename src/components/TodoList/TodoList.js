@@ -1,20 +1,19 @@
 import React from 'react';
-import TodoItem from '../TodoItem/TodoItem';
+import TodoItem from '../TodoItem/TodoItem'; // Importation du composant TodoItem
 
-function TodoList({tasks, removeTask, toggleTaskCompletion}) {
+const TodoList = ({tasks, toggleTask, deleteTask}) => {
   return (
     <ul>
-      {tasks.map((task, index) => (
+      {tasks.map(task => (
         <TodoItem
-          key={index}
+          key={task.id}
           task={task}
-          index={index}
-          removeTask={removeTask}
-          toggleTaskCompletion={toggleTaskCompletion}
+          toggleTask={toggleTask}
+          deleteTask={deleteTask}
         />
       ))}
     </ul>
   );
-}
+};
 
 export default TodoList;
