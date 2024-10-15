@@ -3,6 +3,7 @@ import TodoForm from './components/TodoForm/TodoForm';
 import TodoList from './components/TodoList/TodoList';
 import TaskFilter from './components/TaskFilter/TaskFilter';
 import useTasks from './hooks/useTasks';
+import './App.css';
 
 const App = () => {
   // Utilisation du custom hook useTasks pour gérer l'état des tâches
@@ -21,17 +22,15 @@ const App = () => {
   }, [tasks, filter]);
 
   return (
-    <div>
+    <div className="app-container">
       <h1>Ma Liste de Tâches</h1>
-      <TodoForm addTask={addTask} /> {/* Formulaire pour ajouter une tâche */}
-      <TaskFilter filter={filter} setFilter={setFilter} />{' '}
-      {/* Boutons de filtrage */}
+      <TodoForm addTask={addTask} />
+      <TaskFilter filter={filter} setFilter={setFilter} />
       <TodoList
         tasks={filteredTasks}
         toggleTask={toggleTask}
         deleteTask={deleteTask}
-      />{' '}
-      {/* Liste des tâches */}
+      />
     </div>
   );
 };
